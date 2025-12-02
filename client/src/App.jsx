@@ -26,7 +26,7 @@ export default function App() {
     setMessages(updatedMsgs);
 
     try {
-      const response = await axios.post("http://localhost:5000/chat", {
+      const response = await axios.post("https://belleza-ai-chatbot.vercel.app/chat", {
         message: input,
         conversationHistory: updatedMsgs.map((m) => ({
           role: m.sender === "user" ? "user" : "assistant",

@@ -5,7 +5,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(cors(
+  {
+    origin: "https://belleza-ai-chatbot-8ep6.vercel.app",
+    credentials: true,
+  }
+));
 app.use(express.json());
 
 // Enhanced Belleza Product Database with detailed training
