@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./App.css";
+import { RxCross2 } from "react-icons/rx";
 
 export default function App() {
   const [open, setOpen] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+
   const [messages, setMessages] = useState([
     { sender: "bot", text: "Hi! I am Belleza AI 💖 How can I help you today?" },
   ]);
@@ -24,7 +27,7 @@ export default function App() {
     const userMsg = { sender: "user", text: input };
     const updatedMsgs = [...messages, userMsg];
     setMessages(updatedMsgs);
-
+    setIsTyping(true); 
     try {
       const response = await axios.post("https://belleza-ai-chatbot.vercel.app/chat", {
         message: input,
@@ -46,6 +49,7 @@ export default function App() {
     }
 
     setInput("");
+    setIsTyping(false); 
   };
 
   return (
@@ -60,7 +64,9 @@ export default function App() {
         <div className="belleza-chat-window">
           <div className="chat-header">
             <span>Belleza AI Assistant ✨</span>
-            <button onClick={() => setOpen(false)}>✕</button>
+            <div 
+            className="close-btn"
+            onClick={() => setOpen(false)}><RxCross2/></div>
           </div>
 
           <div className="chat-body">
@@ -69,6 +75,13 @@ export default function App() {
                 {msg.text}
               </div>
             ))}
+            {isTyping && (
+            <div className="msg bot typing">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          )}
             <div ref={messagesEndRef}></div>
           </div>
 

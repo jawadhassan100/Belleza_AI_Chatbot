@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 app.use(cors(
   {
-    origin: "https://belleza-ai-chatbot-8ep6.vercel.app",
+    origin:[ "https://belleza-ai-chatbot-8ep6.vercel.app" , "http://localhost:5173"],
     credentials: true,
   }
 ));
